@@ -38,13 +38,11 @@ public class S1210 {
     public static class Ladder {
         private final int MATRIX_SIZE;
         private final int[][] matrix;
-        private int participant;    // 사다리 참가자 수
         private final LinkedList<Integer> startingPoint;  // 사다리 시작점
 
         public Ladder(int matrix_size) {
             this.MATRIX_SIZE = matrix_size;
             this.matrix = new int[MATRIX_SIZE][MATRIX_SIZE];
-            this.participant = 0;
             this.startingPoint = new LinkedList<>();
         }
 
@@ -53,7 +51,6 @@ public class S1210 {
                 int value = Integer.parseInt(st.nextToken());
                 matrix[row][col] = value;
                 if (row == 0 && value == 1) {
-                    ++this.participant;
                     this.startingPoint.add(col);
                 }
             }
