@@ -1,4 +1,4 @@
-package Memorization;
+package memorization;
 
 import java.io.IOException;
 import java.io.BufferedReader;

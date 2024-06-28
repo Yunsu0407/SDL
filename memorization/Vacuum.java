@@ -1,4 +1,4 @@
-package Memorization;
+package memorization;
 
 public class Vacuum {
     public static void main(String[] args) {

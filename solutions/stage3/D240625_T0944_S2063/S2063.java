@@ -1,4 +1,4 @@
-package Solutions.Stage3.D240625_T0944_S2063;
+package solutions.stage3.D240625_T0944_S2063;
 
 import java.io.IOException;
 import java.io.BufferedReader;
