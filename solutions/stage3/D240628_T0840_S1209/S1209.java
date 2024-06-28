@@ -20,7 +20,6 @@ public class S1209 {
 
         for (int i = 0; i < TESTCASE; ++i) {
             br.readLine().trim();
-            int[][] matrix = new int[SIZE][SIZE];
 
             int[] colSum = new int[SIZE];
             Arrays.fill(colSum, 0);
