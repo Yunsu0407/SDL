@@ -21,8 +21,9 @@ public class KMP {
         int i = 0;  // 텍스트 인덱스
         int j = 0;  // 패턴 인덱스
 
-        while (i < n) {
+        while (i < n) { // 텍스트를 모두 탐색할 때까지 반복
             if (pattern.charAt(j) == text.charAt(i)) {
+                // 현재 위치의 문자가 일치하는 경우, 인덱스를 증가시켜 다음 문자를 비교
                 ++i;
                 ++j;
             }
@@ -31,6 +32,7 @@ public class KMP {
                 ++appearance;
                 j = 0;
             } else if (i < n && pattern.charAt(j) != text.charAt(i)) {
+                // 문자가 일치하지 않은 경우, j 값을 조정하여 패턴을 이동시킴
                 if (j != 0) {
                     // 패턴을 이동할 위치 계산
                     j = pi[--j];
@@ -55,8 +57,10 @@ public class KMP {
 
         while (i < m) {
             if (pattern.charAt(i) == pattern.charAt(len)) {
+                // 접두사와 접미사가 일치하는 경우
                 pi[i++] = ++len;
             } else {
+                // 일치하지 않는 경우, len 값을 조정하여 최대 일치 길이를 갱신
                 if (len != 0) {
                     len = pi[--len];
                 } else {
