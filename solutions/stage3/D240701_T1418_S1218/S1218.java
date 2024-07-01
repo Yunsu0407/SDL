@@ -3,6 +3,7 @@ package solutions.stage3.D240701_T1418_S1218;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 
 public class S1218 {
     public static void main(String[] args) throws IOException {
@@ -18,47 +19,48 @@ public class S1218 {
         for (int i = 0; i < TESTCASE; ++i) {
             final int length = Integer.parseInt(br.readLine().trim());
             String line = br.readLine().trim();
+
             if (length % 2 != 0) {
                 answer[i] = 0;
                 continue;
             }
-            int small = 0;
-            int middle = 0;
-            int large = 0;
-            int special = 0;
+
+            ArrayDeque<Character> brackets = new ArrayDeque<>();
+            answer[i] = 1;
             for (int j = 0; j < length; ++j) {
                 char curr = line.charAt(j);
-                switch (curr) {
-                    case '(':
-                        ++small;
-                        break;
-                    case '{':
-                        ++middle;
-                        break;
-                    case '[':
-                        ++large;
-                        break;
-                    case '<':
-                        ++special;
-                        break;
-                    case ')':
-                        --small;
-                        break;
-                    case '}':
-                        --middle;
-                        break;
-                    case ']':
-                        --large;
-                        break;
-                    case '>':
-                        --special;
-                        break;
+                boolean endLoop = false;
+                if (curr == '(' || curr == '{' || curr == '[' || curr == '<') {
+                    brackets.addFirst(curr);
+                } else {
+                    char top = brackets.removeFirst();
+                    switch (curr) {
+                        case ')':
+                            if (top != '(') {
+                                endLoop = true;
+                            }
+                            break;
+                        case '}':
+                            if (top != '{') {
+                                endLoop = true;
+                            }
+                            break;
+                        case ']':
+                            if (top != '[') {
+                                endLoop = true;
+                            }
+                            break;
+                        case '>':
+                            if (top != '<') {
+                                endLoop = true;
+                            }
+                            break;
+                    }
                 }
-            }
-            if (small == 0 && middle == 0 && large == 0 && special == 0) {
-                answer[i] = 1;
-            } else {
-                answer[i] = 0;
+                if (endLoop) {
+                    answer[i] = 0;
+                    break;
+                }
             }
         }
         for (int i = 0; i < TESTCASE; ++i) {
