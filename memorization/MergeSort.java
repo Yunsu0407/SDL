@@ -47,7 +47,7 @@ public class MergeSort {
         }
     }
 
-    // 두개의 정렬된 배열을 병합하는 함수
+    // 두 개의 정렬된 배열을 병합하는 함수
     public static void merge(int[] array, int left, int middle, int right) {
         // 두 배열의 크기를 계산
         int n1 = middle - left + 1;
