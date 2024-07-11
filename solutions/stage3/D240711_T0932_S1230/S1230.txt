@@ -1,0 +1,43 @@
+* 시간
+종료 시간: 0959
+시작 시간: 0932
+소요 시간: 37분
+
+* 주제:
+암호문
+
+* 설명:
+0 ~ 999,999사이의 수로 표현되는 암호문이 있다.
+이 암호문을 N개 모아놓은 암호문 뭉치가 있다.
+I x,y,s >> I: 삽입, x: 삽입 위치, y: 삽입할 새 암호의 개수, s: 삽입할 새 암호들
+D x,y >> D: 삭제, x: 삭제 위치, y: 삭제할 암호 개수
+A y,s >> A: 추가(맨 뒤), y: 삽일할 암호 개수, s: 암호들
+
+* 제약 사항:
+암호문 뭉치 속 암호의 개수는 2,000개 이상 4,000개 이하의 정수
+명령어의 개수는 250개 이상 500개 이하의 정수
+실행시간 60ms 이하
+number of testcase is 10
+
+* 입력:
+원본 암호문 길이1
+원본 암호문1
+명령어의 개수1
+명령어 문장1
+원본 암호문 길이2
+원본 암호문2
+명령어의 개수2
+명령어 문장2
+...
+
+* 출력:
+#1 00 00 ... (revised cryptogram)
+#2 00 00 ...
+
+* 풀이:
+1. get number of original cryptogram
+2. make ArrayList
+3. use StringTokenizer to accept original cryptogram
+4. add original cryptogram to ArrayList
+5. receive number of order
+6. handling orders using while statement
