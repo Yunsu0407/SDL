@@ -48,7 +48,7 @@ public class S1231 {
         }
         br.close();
 
-        System.out.printf("%s", answer.toString());
+        System.out.printf("%s", answer);
     }
 
     public static class Node {
