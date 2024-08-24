@@ -27,7 +27,7 @@ public class S1232 {
             }
 
             int count = 1;
-            double total = calculate(array, count, quantity + 1);
+            double total= calculate(array, count, quantity + 1);
             answer.append(String.format("#%d %d\n", i + 1, Math.round(total)));
         }
 
