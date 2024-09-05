@@ -1,28 +1,48 @@
-package D1;
+package study.D1;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Practice {
-    public static void main(String[] args) {
-        // 2차원 ArrayList 선언
-        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
+        changeSystem();
+    }
 
-        // 첫 번째 행 추가 및 데이터 추가
-        matrix.add(new ArrayList<Integer>());
-        matrix.get(0).add(1);
-        matrix.get(0).add(2);
+    public static void changeSystem() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine().trim());
+        String number = st.nextToken();
+        int system = Integer.parseInt(st.nextToken());
+        br.close();
 
-        // 두 번째 행 추가 및 데이터 추가
-        matrix.add(new ArrayList<Integer>());
-        matrix.get(1).add(3);
-        matrix.get(1).add(4);
+        int ans = changing(number, system);
+    }
 
-        // 데이터 출력
-        for (int i = 0; i < matrix.size(); i++) {
-            for (int j = 0; j < matrix.get(i).size(); j++) {
-                System.out.print(matrix.get(i).get(j) + " ");
+    public static int changing(String number, int system) {
+        int value = 0;
+        int multi = system - 1;
+        final int size = number.length();
+
+        for (int i = 0; i < size; ++i) {
+            int curr = number.charAt(0) - 'A';
+            if(curr < 0){
+                curr = curr + 'A';
             }
-            System.out.println();
+            multiply(curr, i, system);
         }
+
+        return value;
+    }
+
+    public static int multiply(int system, int curr, int location){
+        int loValue = 1;
+        int result = 0;
+        for(int i = 0; i < location; ++i){
+            loValue = loValue * system;
+        }
+        result = curr + system;
+        return result;
     }
 }

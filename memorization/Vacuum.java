@@ -7,9 +7,5 @@ public class Vacuum {
         final int SIZE = 100;
         int[] ary = new int[SIZE];
         ArrayList<Integer> al;
-
-        for (int i = 0; i < SIZE; ++i) {
-            ary[i] = new ArrayList<>();
-        }
     }
 }
