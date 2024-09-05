@@ -1,28 +1,23 @@
 package D1;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Practice {
-    public static void main(String[] args) {
-        // 2차원 ArrayList 선언
-        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
+        prnEqually();
+    }
 
-        // 첫 번째 행 추가 및 데이터 추가
-        matrix.add(new ArrayList<Integer>());
-        matrix.get(0).add(1);
-        matrix.get(0).add(2);
+    public static void prnEqually() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
-        // 두 번째 행 추가 및 데이터 추가
-        matrix.add(new ArrayList<Integer>());
-        matrix.get(1).add(3);
-        matrix.get(1).add(4);
-
-        // 데이터 출력
-        for (int i = 0; i < matrix.size(); i++) {
-            for (int j = 0; j < matrix.get(i).size(); j++) {
-                System.out.print(matrix.get(i).get(j) + " ");
-            }
-            System.out.println();
+        String word;
+        while((word = br.readLine()) != null){
+            sb.append(word).append("\n");
         }
+
+        System.out.println(sb);
     }
 }
