@@ -1,4 +1,4 @@
-package study.D240910_T1622_B1244;
+package D240910_T1622_B1244;
 
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -94,7 +94,7 @@ public class B1244 {
                 sb.append(NO);
             }
             sb.append(" ");
-            if (i > 0 && i % 20 == 0) {
+            if (i > 0 && (i+1) % 20 == 0) {
                 sb.append("\n");
             }
         }
