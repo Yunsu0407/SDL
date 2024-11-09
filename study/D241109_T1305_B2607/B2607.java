@@ -27,7 +27,7 @@ public class B2607 {
             int[] cmp_counts = std_counts.clone();
 
             if (Math.abs(std_size - cmp_size) > 1) {
-                continue;
+                continue; // 길이 차이가 2 이상인 경우는 유사하지 않음
             }
 
             for (int j = 0; j < cmp_size; ++j) {
@@ -35,21 +35,19 @@ public class B2607 {
                 --cmp_counts[curr_alpha];
             }
 
-            int sum = 0;
-            boolean pass = false;
-            for(int curr : cmp_counts){
-                if(Math.abs(curr) >= 2){
-                    pass = true;
-                    break;
-                }
-                sum = sum + curr;
+            int positiveDiff = 0;
+            int negativeDiff = 0;
+
+            for (int count : cmp_counts) {
+                if (count > 0) positiveDiff += count;
+                else if (count < 0) negativeDiff -= count;
             }
 
-            if(pass){
-                continue;
-            }
-
-            if(sum <= 1){
+            // 유사 단어 조건 판단
+            if ((positiveDiff == 1 && negativeDiff == 0) || // 한 글자 추가
+                    (positiveDiff == 0 && negativeDiff == 1) || // 한 글자 제거
+                    (positiveDiff == 1 && negativeDiff == 1) || // 한 글자 차이
+                    (positiveDiff == 0 && negativeDiff == 0)) { // 같은 단어
                 ++similar_word;
             }
         }
