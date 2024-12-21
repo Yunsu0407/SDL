@@ -25,7 +25,7 @@ public class B2745 {
     public static void changeSystem() throws IOException {
 //        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 //        BufferedReader br = new BufferedReader(new StringReader("ZZZZZ 36"));
-        BufferedReader br = new BufferedReader(new StringReader("123 10"));
+        BufferedReader br = new BufferedReader(new StringReader("temp 10"));
         StringTokenizer st = new StringTokenizer(br.readLine().trim());
         String expr = st.nextToken();
         int system = Integer.parseInt(st.nextToken());
