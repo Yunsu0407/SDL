@@ -1,5 +1,2 @@
-package memorization;
-
-public class Vacuum{
-
+public class Vacuum {
 }
