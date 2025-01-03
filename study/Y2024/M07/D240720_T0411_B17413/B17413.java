@@ -1,4 +1,4 @@
-package study.Y2024.M7.D240720_T0411_B17413;
+package study.Y2024.M07.D240720_T0411_B17413;
 
 import java.io.BufferedReader;
 import java.io.IOException;

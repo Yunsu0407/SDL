@@ -1,4 +1,4 @@
-package study.Y2024.M9.D240913_T1928_B14888;
+package study.Y2024.M09.D240913_T1928_B14888;
 
 import java.io.*;
 import java.util.*;

@@ -1,7 +1,6 @@
-package study.Y2024.M9.D240927_T1238_B20310;
+package study.Y2024.M09.D240927_T1238_B20310;
 
 import java.io.*;
-import java.util.*;
 
 public class B20310 {
     public static void main(String[] args) throws IOException {

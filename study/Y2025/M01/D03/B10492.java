@@ -1,10 +1,11 @@
-package Y2025.M01.D03;
+package study.Y2025.M01.D03;
 
 import java.util.*;
 import java.io.*;
 
 /*
 홍준이가 자연수 N개를 칠판에 적는다.
+각 수는 1이상 100,000이하이다.
 명우에게 질문을 M번 한다.
 질문은 두 정수 S와 E로 나타냄
 S번째 수부터 E번째 까지의 수가 팰린드롬을 이루는지 물어보면 명우가 팰린드롬이 맞는지 아닌지를 말해야함
@@ -18,6 +19,8 @@ S=3,E=3인 경우 1은 팰린드롬이고,
 S=5,E=7인 경우 1,2,1은 팰린드롬이다.
 
 팰린드롬인 경우 1, 아니면 0
+
+1213121
  */
 
 public class B10492 {
@@ -50,19 +53,27 @@ public class B10492 {
             int start = Integer.parseInt(st.nextToken()) - 1;
             int end = Integer.parseInt(st.nextToken()) - 1;
             int mid = (start + end) / 2;
-            boolean good = true;
+            String comp1, comp2;
+            int num1, num2;
 
-            while (start < mid) {
-                if (sentence.charAt(start) != sentence.charAt(end)) {
-                    sb.append("0\n");
-                    good = false;
-                    break;
-                }
-                ++start;
-                --end;
-            }
-            if (good) {
+            if(start == end){
                 sb.append("1\n");
+                continue;
+            }
+
+            if ((start + end) % 2 == 0) {
+                comp1 = sentence.substring(start, mid);
+            } else {
+                comp1 = sentence.substring(start, mid + 1);
+            }
+            comp2 = new StringBuilder(sentence.substring(mid + 1, end + 1)).reverse().toString();
+            num1 = Integer.parseInt(comp1);
+            num2 = Integer.parseInt(comp2);
+
+            if(num1 - num2 == 0){
+                sb.append("1\n");
+            } else {
+                sb.append("0\n");
             }
         }
 
