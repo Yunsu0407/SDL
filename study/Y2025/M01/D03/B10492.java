@@ -1,4 +1,4 @@
-package study.Y2025.M01.D03;
+package Y2025.M01.D03;
 
 import java.util.*;
 import java.io.*;
@@ -48,6 +48,17 @@ public class B10492 {
         sb = new StringBuilder();
         int tc = Integer.parseInt(br.readLine().trim());
 
+        // 1213121
+        // 2 4 -> 1 3, 1 & 3
+        // 4
+        // 121
+        // 1, 1
+
+        // 2 5 -> 1 4, 1 2 & 3 4
+        // 5
+        // 1213
+        // 12, 13
+
         for (int i = 0; i < tc; ++i) {
             st = new StringTokenizer(br.readLine().trim());
             int start = Integer.parseInt(st.nextToken()) - 1;
@@ -67,10 +78,8 @@ public class B10492 {
                 comp1 = sentence.substring(start, mid + 1);
             }
             comp2 = new StringBuilder(sentence.substring(mid + 1, end + 1)).reverse().toString();
-            num1 = Integer.parseInt(comp1);
-            num2 = Integer.parseInt(comp2);
 
-            if(num1 - num2 == 0){
+            if(comp1.equals(comp2)){
                 sb.append("1\n");
             } else {
                 sb.append("0\n");
