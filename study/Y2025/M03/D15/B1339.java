@@ -26,33 +26,8 @@ public class B1339 {
         computeAlphabet();
     }
 
-    public static String input1 = "2\n" +
-            "AAA\n" +
-            "AAA";
-
-    public static String input2 = "2\n" +
-            "GCF\n" +
-            "ACDEB"; // ans = 99437
-
-    public static String input3 = "10\n" +
-            "A\n" +
-            "B\n" +
-            "C\n" +
-            "D\n" +
-            "E\n" +
-            "F\n" +
-            "G\n" +
-            "H\n" +
-            "I\n" +
-            "J";
-
-    public static String input4 = "2\n" +
-            "AB\n" +
-            "BA";
-
     public static void computeAlphabet() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input2));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int size = Integer.parseInt(br.readLine().trim());
         HashMap<Character, Integer> alphabetWeights = new HashMap<>();
 
