@@ -48,7 +48,7 @@ public class B1339 {
         // 리스트로 변환
         List<Map.Entry<Character, Integer>> sortedList = new ArrayList<>(alphabetWeights.entrySet());
         // value 기준 내림차순 정렬
-        sortedList.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+        sortedList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
         int ans = 0;
         int digit = 9;
