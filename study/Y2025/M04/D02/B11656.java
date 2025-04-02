@@ -10,9 +10,11 @@ public class B11656 {
 
     public static void orderPrefix() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine().trim();
-        List<String> prefix = new ArrayList<>();
+        System.out.print(getPrefix(br.readLine().trim()));
+    }
 
+    public static String getPrefix(String str) {
+        List<String> prefix = new ArrayList<>();
         for (int i = 0; i < str.length(); ++i) {
             prefix.add(str.substring(i));
         }
@@ -23,6 +25,6 @@ public class B11656 {
             sb.append(curr).append("\n");
         }
 
-        System.out.print(sb.toString());
+        return sb.toString();
     }
 }
