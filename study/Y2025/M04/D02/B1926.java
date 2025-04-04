@@ -1,4 +1,4 @@
-package Y2025.M04.D02;
+package study.Y2025.M04.D02;
 
 import java.util.*;
 import java.io.*;
