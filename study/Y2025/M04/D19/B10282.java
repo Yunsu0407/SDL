@@ -1,4 +1,4 @@
-package Y2025.M04.D19;
+package study.Y2025.M04.D19;
 
 import java.util.*;
 import java.io.*;
@@ -17,9 +17,19 @@ public class B10282 {
             "3 1 8\n" +
             "3 2 4";
 
+    public static String input2 = "1\n" +
+            "4 5 1\n" +
+            "4 1 1\n" +
+            "2 4 10\n" +
+            "3 1 2\n" +
+            "2 3 2\n" +
+            "3 2 2"; // ans = 4 4
+
+    // 가능한 모든 컴퓨터가 감염되는 시간을 구해야한다.
+
     public static void happyHacking() throws IOException {
         // BufferedReader br = new BufferedReader(new InputStreamReader((System.in)));
-        BufferedReader br = new BufferedReader(new StringReader(input1));
+        BufferedReader br = new BufferedReader(new StringReader(input2));
         int testcase = Integer.parseInt(br.readLine().trim());
         StringBuilder sb = new StringBuilder();
 
@@ -28,87 +38,105 @@ public class B10282 {
             int cptSize = Integer.parseInt(st.nextToken());
             int edgeSize = Integer.parseInt(st.nextToken());
             int hacked = Integer.parseInt(st.nextToken());
-            Map<Integer, List<Infection>> adjList = new HashMap<>();
+            Map<Integer, List<Integer[]>> adjList = new HashMap<>();
 
+            // 인접리스트 생성
             for (int j = 0; j < edgeSize; ++j) {
                 st = new StringTokenizer(br.readLine().trim());
-                int dst = Integer.parseInt(st.nextToken());
-                int src = Integer.parseInt(st.nextToken());
-                int sec = Integer.parseInt(st.nextToken());
+                int to = Integer.parseInt(st.nextToken());
+                int from = Integer.parseInt(st.nextToken());
+                int cost = Integer.parseInt(st.nextToken());
 
-                // HashMap에 Adjacent List 형태로 관계 저장
-                List<Infection> edge;
-                if (adjList.containsKey(src)) {
-                    edge = adjList.get(src);
+                List<Integer[]> edges;
+                if (adjList.containsKey(from)) {
+                    edges = adjList.get(from);
                 } else {
-                    edge = new ArrayList<>();
+                    edges = new ArrayList<>();
                 }
-                edge.add(new Infection(dst, sec));
-                adjList.put(src, edge);
+
+                edges.add(new Integer[]{to, cost});
+                adjList.put(from, edges);
             }
 
-            // a b s, a <-(infect)- b (s)
-            Queue<Infection> pq = new PriorityQueue<>();
-            int[][] isInfected = new int[cptSize + 1][2]; // 감염여부, 감염시간
-            final int VISIT = 0, DP = 1;
-            int hackedSize = 0, minSec = 1_001;
+            int minSec = Integer.MAX_VALUE;
+            int infected = 0;
+            Queue<Virus> queue = new PriorityQueue<>();
+            queue.add(new Virus(cptSize, hacked));
 
-            for (int j = 0; j < cptSize + 1; ++j) {
-                isInfected[j][1] = Integer.MAX_VALUE;
-            }
+            while (!queue.isEmpty()) {
+                Virus cVirus = queue.remove();
+                boolean isContinue = false;
 
-            isInfected[hacked][VISIT] = 1;
-            isInfected[hacked][DP] = 0;
-            ++hackedSize;
-            pq.add(new Infection(hacked, 0));
-
-            while (!pq.isEmpty()) {
-                Infection curr = pq.remove();
-                int currCpt = curr.cpt;
-                int currSec = curr.sec;
-
-                if (adjList.containsKey(currCpt)) {
-                    for (Infection next : adjList.get(currCpt)) {
-                        int nextCpt = next.cpt;
-                        int nextSec = currSec + next.sec;
-                        boolean isVisit = isInfected[nextCpt][VISIT] < 1;
-
-                        if (isVisit) { // 방문하지 않고, 최소 시간이면
-                            isInfected[nextCpt][VISIT] = 1;
-                            isInfected[nextCpt][DP] = nextSec;
-                            ++hackedSize;
-                            pq.add(new Infection(nextCpt, nextSec));
-                        } else {
-                            boolean isMin = nextSec < isInfected[nextCpt][DP];
-                            if (isMin) {
-                                isInfected[nextCpt][DP] = nextSec;
-                                pq.add(new Infection(nextCpt, nextSec));
-                            }
+                if (adjList.containsKey(cVirus.cpt)) {
+                    for (Integer[] next : adjList.get(cVirus.cpt)) {
+                        if (!cVirus.isVisit(next[0])) {
+                            isContinue = true;
+                            queue.add(new Virus(cVirus, next));
                         }
                     }
-                } else {
-                    minSec = Math.min(minSec, currSec);
+                }
+
+                if(!isContinue) {
+                    infected = cVirus.infected;
+                    minSec = cVirus.accSec;
+                    break;
                 }
             }
 
-            sb.append(hackedSize).append(" ").append(minSec).append("\n");
+            sb.append(infected).append(" ").append(minSec).append("\n");
+
         }
 
         System.out.println(sb.toString());
     }
 
-    public static class Infection implements Comparable<Infection> {
+    public static class Virus implements Comparable<Virus>{
+        boolean[] visit;
         int cpt;
-        int sec;
+        int accSec;
+        int infected;
 
-        public Infection(int cpt, int sec) {
-            this.cpt = cpt;
-            this.sec = sec;
+        public Virus(int cptSize, int hacked) {
+            visit = new boolean[cptSize + 1];
+            cpt = hacked;
+            visit[hacked] = true;
+            accSec = 0;
+            infected = 1;
+        }
+
+        public Virus(Virus prev, Integer[] next) {
+            visit = prev.visit.clone();
+            visit[next[0]] = true;
+            cpt = next[0];
+            accSec = prev.accSec + next[1];
+            infected = prev.infected + 1;
         }
 
         @Override
-        public int compareTo(Infection other) {
-            return Integer.compare(this.sec, other.sec);
+        public int compareTo(Virus other) {
+            return Integer.compare(this.accSec, other.accSec);
+        }
+
+        public boolean isVisit(int cpt) {
+            return visit[cpt];
         }
     }
+
+    /*
+    큐에 1번 컴퓨터를 넣는다.
+
+    큐가 비어있지 않은 동안 다음을 반복
+        큐에서 현재 컴퓨터를 가져온다.
+        현재 컴퓨터와 연결된 다음 컴퓨터 목록을 가져온다. // 인접 리스트
+
+        다음 방문지가 있는지 확인하는 변수 선언 // isNextExist = false;
+
+        컴퓨터 목록으로 다음을 반복한다.
+            현재 컴퓨터가 다음 컴퓨터를 방문하지 않았으면
+                방문 처리하고 큐에 다음 컴퓨터 삽입
+                다음 방문지 확인 변수에 true 할당 // isNextExist = true;
+
+        만약 다음에 방문할 수 있는 곳이 없으면
+            현재 누적 시간을 종료 시간에 갱신한다
+     */
 }
