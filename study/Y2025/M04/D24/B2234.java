@@ -1,30 +1,17 @@
-package Y2025.M04.D23;
+package study.Y2025.M04.D24;
 
 import java.util.*;
 import java.io.*;
 
 public class B2234 {
     public static void main(String[] args) throws IOException {
-        func();
+        checkCastle();
     }
-
-    public static String input1 = "7 4\n" +
-            "11 6 11 6 3 10 6\n" +
-            "7 9 6 13 5 15 5\n" +
-            "1 10 12 7 13 7 5\n" +
-            "13 11 10 8 10 12 13";
 
     public static final int ROW = 0, COL = 1;
 
-    /*
-    1. 방의 개수
-    2. 가장 넓은 방의 넓이
-    3. 하나의 벽을 제거하여 얻을 수 있는 가장 넓은 방의 크기
-     */
-
-    public static void func() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input1));
+    public static void checkCastle() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine().trim());
         int orgColSize = Integer.parseInt(st.nextToken());
         int orgRowSize = Integer.parseInt(st.nextToken());
@@ -38,82 +25,107 @@ public class B2234 {
             for (int j = 0; j < orgColSize; ++j) {
                 int currData = Integer.parseInt(st.nextToken());
                 setMap(map, currData, i, j);
-
             }
         }
 
+        ArrayList<Room> rooms = new ArrayList<>();
         boolean[][] visit = new boolean[mapRowSize][mapColSize];
         int roomCount = 0;
         int maxRoomSize = 0;
         for (int i = 0; i < mapRowSize; ++i) {
             for (int j = 0; j < mapColSize; ++j) {
                 if (!visit[i][j] && map[i][j] == 2) { // 방문하지 않은 방이라면
-                    ++roomCount;
-                    int roomSize = getRoomSize(map, visit, i, j);
-                    maxRoomSize = Math.max(maxRoomSize, roomSize);
+                    ++roomCount; // 방의 개수 증가
+                    Room room = getRoomSize(map, visit, i, j); // 방 정보 가져옴
+                    maxRoomSize = Math.max(maxRoomSize, room.roomSize); // 최대 방 넓이 갱신
+                    rooms.add(room);
                 }
             }
         }
 
+        int idealRoomSize = getIdealRoomSize(rooms);
+
         StringBuilder sb = new StringBuilder();
         sb.append(roomCount).append("\n");
         sb.append(maxRoomSize).append("\n");
+        sb.append(idealRoomSize);
         System.out.println(sb.toString());
     }
 
-    public static int getRoomSize(int[][] map, boolean[][] visit, int row, int col) {
+    public static class Room {
+        int roomSize;
+        Set<List<Integer>> walls;
+
+        public Room() {
+            roomSize = 0;
+            walls = new HashSet<>();
+        }
+
+        public void addWall(int row, int col) {
+            walls.add(Arrays.asList(row, col));
+        }
+    }
+
+    public static int getIdealRoomSize(ArrayList<Room> rooms) {
+        int idealRoomSize = 0;
+        while (!rooms.isEmpty()) {
+            Room prevRoom = rooms.remove(0);
+            Set<List<Integer>> prevWalls = prevRoom.walls;
+
+            for (Room currRoom : rooms) {
+                Set<List<Integer>> currWalls = currRoom.walls;
+                int roomSize = prevRoom.roomSize;
+
+                for (List<Integer> prevWall : prevWalls) {
+                    if (currWalls.contains(prevWall)) {
+                        roomSize = roomSize + currRoom.roomSize;
+                        idealRoomSize = Math.max(idealRoomSize, roomSize);
+                        break;
+                    }
+                }
+            }
+        }
+        return idealRoomSize;
+    }
+
+    public static Room getRoomSize(int[][] map, boolean[][] visit, int row, int col) {
         Queue<int[]> queue = new ArrayDeque<>();
         int[][] dir = {
                 {-1, +0, +1, +0},
                 {+0, +1, +0, -1}
         }; // 12 3 6 9
-        int roomSize = 0;
+        Room room = new Room();
 
         visit[row][col] = true;
         queue.add(new int[]{row, col});
-        ++roomSize;
+        ++room.roomSize;
 
         while (!queue.isEmpty()) {
             int[] curr = queue.remove();
 
-            for (int i = 0; i < dir[0].length; ++i) {
+            for (int i = 0; i < dir[0].length; ++i) { // 사방을 확인
                 int nextRow = curr[ROW] + dir[ROW][i];
                 int nextCol = curr[COL] + dir[COL][i];
 
                 if (map[nextRow][nextCol] != 1) { // 벽이 아니면
                     int nextNextRow = curr[ROW] + dir[ROW][i] * 2;
                     int nextNextCol = curr[COL] + dir[COL][i] * 2;
-                    if (nextNextRow < 0 || nextNextRow >= map.length || nextNextCol < 0 || nextNextCol >= map.length) {
+                    if (nextNextRow < 0 || nextNextRow >= map.length || nextNextCol < 0 || nextNextCol >= map[0].length) {
                         continue;
                     } // 다음 다음 영역이 배열 범위를 벗어나면 스킵
-                    if(!visit[nextNextRow][nextNextCol]){ // 방문하지 않은 곳이면 추가
+                    if (!visit[nextNextRow][nextNextCol]) { // 방문하지 않은 곳이면 추가
                         visit[nextNextRow][nextNextCol] = true;
                         queue.add(new int[]{nextNextRow, nextNextCol});
-                        ++roomSize;
+                        ++room.roomSize;
                     }
+                } else { // 벽이면
+                    // room.addWall(new int[]{nextRow, nextCol});
+                    room.addWall(nextRow, nextCol);
                 }
             }
         }
-        return roomSize;
+        return room;
     }
-
-    /*
-    0 1 0 1 0
-    1 2 0 2 1
-    0 1 0 1 0
-    1 2 1 2 1
-    0 1 0 1 0
-
-    만약 값이 2라면
-      사방이 1이라면
-        크기가 1인 방
-      하나라도 0이 있으면
-        그 방향 옆 방이 2라면
-          큐에 넣음
-        큐가 비어있지 않은 동안 반복
-
-     */
-
     // 좌 1, 상 2, 우 4, 하 8
     public static void setMap(int[][] map, int currData, int row, int col) {
         int[][] dir = {
@@ -147,20 +159,3 @@ public class B2234 {
         return wall;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
