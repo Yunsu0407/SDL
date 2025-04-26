@@ -119,7 +119,6 @@ public class B2234 {
                         ++room.roomSize;
                     }
                 } else { // 벽이면
-                    // room.addWall(new int[]{nextRow, nextCol});
                     room.addWall(nextRow, nextCol);
                 }
             }
