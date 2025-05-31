@@ -40,13 +40,14 @@ public class B10819 {
 
             for (int i = 0; i < num.length; ++i) {
                 if (!used[i]) {
+                    used[i] = true;
+
                     int curr = num[i];
                     int locSum = Math.abs(prev - curr);
                     int nxtSum = sum + locSum;
-                    boolean[] nxtUsed = used.clone();
-                    nxtUsed[i] = true;
 
-                    recSum(num, nxtUsed, i, nxtCnt, nxtSum);
+                    recSum(num, used, i, nxtCnt, nxtSum);
+                    used[i] = false;
                 }
             }
         } else {
