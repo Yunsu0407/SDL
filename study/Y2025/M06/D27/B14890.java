@@ -8,17 +8,8 @@ public class B14890 {
         slope();
     }
 
-    public static String input1 = "6 2\n" +
-            "3 3 3 3 3 3\n" +
-            "2 3 3 3 3 3\n" +
-            "2 2 2 3 2 3\n" +
-            "1 1 1 2 2 2\n" +
-            "1 1 1 3 3 1\n" +
-            "1 1 2 3 3 2"; // 3
-
     public static void slope() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input1));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine().trim());
         int size = Integer.parseInt(st.nextToken());
         int limit = Integer.parseInt(st.nextToken());
@@ -60,18 +51,86 @@ public class B14890 {
 
             pRow = cRow - dr;
             pCol = cCol - dc;
-            if (pRow >= 0 && pCol >= 0) {
-                pVal = map[pRow][pCol];
-                if(pVal == cVal) {
-                    for(int i = 1; i <= limit; ++i) {
+            if (pRow < 0 || pCol < 0) {
+                continue;
+            }
+            pVal = map[pRow][pCol];
+            int pcDiff = pVal - cVal;
 
+            if (pcDiff == 1) { // -_
+                int accIdx = isRow ? cCol : cRow;
+                ++acc[accIdx];
+
+                int count = 1;
+                for (int i = 1; i < limit; ++i) {
+                    nRow = cRow + dr;
+                    nCol = cCol + dc;
+
+                    if (nRow >= size || nCol >= size) {
+                        break;
+                    }
+
+                    nVal = map[nRow][nCol];
+                    if (cVal == nVal) {
+                        ++count;
+                        ++accIdx;
+                        ++acc[accIdx];
+
+                        cRow = nRow;
+                        cCol = nCol;
+                        cVal = nVal;
+                    } else {
+                        break;
                     }
                 }
+
+                if (count < limit) {
+                    possible = false;
+                    break;
+                }
+            } else if (pcDiff == -1) { // _-
+                int accIdx = isRow ? pCol : pRow;
+                ++acc[accIdx];
+
+                int count = 1;
+                for (int i = 1; i < limit; ++i) {
+                    cRow = pRow;
+                    cCol = pCol;
+                    cVal = pVal;
+
+                    pRow = cRow - dr;
+                    pCol = cCol - dc;
+
+                    if (pRow < 0 || pCol < 0) {
+                        break;
+                    }
+
+                    pVal = map[pRow][pCol];
+                    if (pVal == cVal) {
+                        ++count;
+                        --accIdx;
+                        ++acc[accIdx];
+                    }
+                }
+
+                if (count < limit) {
+                    possible = false;
+                    break;
+                }
+            } else if (pcDiff == 0) { // --
+                continue;
+            } else {
+                possible = false;
+                break;
             }
-
-
         }
 
+        for(int element: acc) {
+            if(element > 1) {
+                possible = false;
+                break;
+            }
+        }
 
         return possible;
     }
