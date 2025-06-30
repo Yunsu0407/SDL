@@ -16,7 +16,7 @@ public class B2217 {
         for (int i = 0; i < size; ++i) {
             al.add(Integer.parseInt(br.readLine().trim()));
         }
-        Collections.sort(al, Collections.reverseOrder());
+        al.sort(Collections.reverseOrder());
 
         int max = 0;
         for (int i = 0; i < size; ++i) {
