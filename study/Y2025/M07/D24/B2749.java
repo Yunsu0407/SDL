@@ -8,25 +8,42 @@ public class B2749 {
         fibonacci3();
     }
 
-    public static String input1 = "1000"; // 228875
-    public static String input2 = "17"; // 1597
-    public static String input3 = "1000000000000000000"; // 1597
+    public static final int DIV = 1000000;
 
     public static void fibonacci3() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input3));
-        final int DIV = 1000000;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         long end = Long.parseLong(br.readLine().trim());
-        long first = 0, second = 1;
-        long count = 1;
+        List<Integer> fib = new ArrayList<>();
 
-        while(count != end) {
-            long temp = second;
+        int pisanoPeriod = getPisanoPeriod(fib);
+
+        int targetIdx = (int)(end % pisanoPeriod);
+        int ans = fib.get(targetIdx);
+
+        System.out.print(ans);
+    }
+
+    // 피보나치 수열의 합과 피사노 주기를 구하는 함수
+    public static int getPisanoPeriod(List<Integer> fib) {
+        int first = 0, second = 1;
+        int period = 1;
+
+        fib.add(first);
+        fib.add(second);
+
+        while(true) {
+            int temp = second;
             second = (second + first) % DIV;
             first = temp;
-            ++count;
+
+            fib.add(second);
+            ++period;
+
+            if(first == 0 && second == 1) {
+                break;
+            }
         }
 
-        System.out.println(second);
+        return period - 1;
     }
 }
