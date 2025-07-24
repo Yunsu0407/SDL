@@ -1,6 +1,5 @@
-package study.Y2025.M07.D22;
+package study.Y2025.M07.D23;
 
-import java.util.*;
 import java.io.*;
 
 public class B1094 {
