@@ -52,7 +52,6 @@ public class B13460 {
         int colSize = Integer.parseInt(st.nextToken());
         int[][] board = new int[rowSize][colSize];
         int[][] pos = new int[2][2];
-        int[] hole = new int[2];
 
         for (int r = 0; r < rowSize; ++r) {
             String[] line = br.readLine().trim().split("");
@@ -62,16 +61,13 @@ public class B13460 {
                 if (state == RED || state == BLUE) {
                     pos[state][ROW] = r;
                     pos[state][COL] = c;
-                } else if (state == HOLE) {
-                    hole[ROW] = r;
-                    hole[COL] = c;
                 }
             }
         }
         Position position = new Position(pos);
         set.add(position);
 
-        checkBoard(board, position, hole, 0);
+        checkBoard(board, position, 0);
 
         if (min == LIMIT + 1) {
             min = -1;
@@ -85,8 +81,8 @@ public class B13460 {
     public static final int KIND = 2, LIMIT = 10;
     public static int min = LIMIT + 1;
 
-    public static void checkBoard(int[][] board, Position position, int[] hole, int count) {
-        boolean possible = count < LIMIT;
+    public static void checkBoard(int[][] board, Position position, int count) {
+        boolean possible = count < LIMIT && count < min;
         if (!possible) {
             return;
         }
@@ -122,7 +118,7 @@ public class B13460 {
                 } else { // keep
                     Position nPosition = new Position(nPos);
                     if (!set.contains(nPosition)) {
-                        checkBoard(nBoard, nPosition, hole, nCount);
+                        checkBoard(nBoard, nPosition, nCount);
                     }
                 }
             }
