@@ -44,10 +44,10 @@ public class B2294 {
 
         while (!pq.isEmpty()) {
             Data data = pq.poll();
+            int usage = data.usage + 1;
 
             for (int coin : coinList) {
                 int rest = data.rest - coin;
-                int usage = data.usage + 1;
 
                 if (usage < min) {
                     if (rest == 0) {
