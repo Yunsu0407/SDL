@@ -8,15 +8,8 @@ public class B10250 {
         hotelACM();
     }
 
-    public static String input1 = "4\r\n" + //
-            "6 12 10\r\n" + //
-            "3 1 2\r\n" + //
-            "1 4 1\r\n" + //
-            "30 50 72";
-
     public static void hotelACM() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input1));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int testcase = Integer.parseInt(br.readLine().trim());
         StringBuilder sb = new StringBuilder();
 
