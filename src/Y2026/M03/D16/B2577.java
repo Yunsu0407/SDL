@@ -1,6 +1,5 @@
 package Y2026.M03.D16;
 
-import java.util.*;
 import java.io.*;
 
 public class B2577 {
@@ -8,13 +7,8 @@ public class B2577 {
         countDigit();
     }
 
-    public static String input1 = "150\r\n" + //
-            "266\r\n" + //
-            "427";
-
     public static void countDigit() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input1));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int num1 = Integer.parseInt(br.readLine().trim());
         int num2 = Integer.parseInt(br.readLine().trim());
         int num3 = Integer.parseInt(br.readLine().trim());
