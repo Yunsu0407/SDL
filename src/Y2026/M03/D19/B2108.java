@@ -8,39 +8,8 @@ public class B2108 {
         statistics();
     }
 
-    /*
-     * N은 홀수
-     * 1. 산술평균
-     * 2. 중앙값
-     * 3. 최빈값
-     * 4. 범위 (최대 최소의 차이)
-     */
-
-    public static String input1 = "5\r\n" + //
-            "1\r\n" + //
-            "3\r\n" + //
-            "8\r\n" + //
-            "-2\r\n" + //
-            "2";
-
-    public static String input2 = "1\r\n" + //
-            "4000";
-
-    public static String input3 = "5\r\n" + //
-            "-1\r\n" + //
-            "-2\r\n" + //
-            "-3\r\n" + //
-            "-1\r\n" + //
-            "-2";
-
-    public static String input4 = "3\r\n" + //
-            "0\r\n" + //
-            "0\r\n" + //
-            "-1";
-
     public static void statistics() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input4));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int size = Integer.parseInt(br.readLine().trim());
         List<Integer> arr = new ArrayList<>();
         Map<Integer, Integer> map = new TreeMap<>();
