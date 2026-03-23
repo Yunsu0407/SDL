@@ -8,17 +8,8 @@ public class B28702 {
         guessWhat();
     }
 
-    public static String input1 = "Fizz\r\n" + //
-            "Buzz\r\n" + //
-            "11";
-
-    public static String input2 = "980803\r\n" + //
-            "980804\r\n" + //
-            "FizzBuzz";
-
     public static void guessWhat() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input2));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] vals = new String[3];
 
         for (int i = 0; i < vals.length; ++i) {
@@ -47,8 +38,6 @@ public class B28702 {
         } else { // vals[0] == i
             ans = judge(vals[0], 3);
         }
-
-        int stop = 0;
 
         System.out.println(ans);
     }
