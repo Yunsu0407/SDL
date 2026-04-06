@@ -1,4 +1,4 @@
-package D05;
+package Y2026.M04.D05;
 
 import java.util.*;
 import java.io.*;
