@@ -8,16 +8,8 @@ public class B18110 {
         avgLevel();
     }
 
-    public static String input1 = "5\r\n" + //
-            "1\r\n" + //
-            "5\r\n" + //
-            "5\r\n" + //
-            "7\r\n" + //
-            "8"; // 6
-
     public static void avgLevel() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input1));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int size = Integer.parseInt(br.readLine().trim());
         int[] level = new int[31];
         int sum = 0;
@@ -46,8 +38,8 @@ public class B18110 {
             int curr = level[idx];
 
             if (curr <= cut) {
-                cut = cut - curr;
                 sum = sum + idx * curr;
+                cut = cut - curr;
             } else {
                 sum = sum + idx * cut;
                 cut = 0;
