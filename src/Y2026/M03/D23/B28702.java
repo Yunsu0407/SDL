@@ -1,6 +1,5 @@
 package Y2026.M03.D23;
 
-import java.util.*;
 import java.io.*;
 
 public class B28702 {

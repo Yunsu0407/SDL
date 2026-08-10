@@ -16,7 +16,7 @@ public class B10250 {
         for (int i = 0; i < testcase; ++i) {
             StringTokenizer st = new StringTokenizer(br.readLine().trim());
             int height = Integer.parseInt(st.nextToken());
-            int width = Integer.parseInt(st.nextToken());
+            st.nextToken();
             int guest = Integer.parseInt(st.nextToken());
 
             int floor = ((guest - 1) % height + 1) * 100;

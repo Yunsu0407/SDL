@@ -1,6 +1,5 @@
 package Y2026.M04.D16;
 
-import java.util.*;
 import java.io.*;
 
 public class B18110 {

@@ -1,6 +1,5 @@
 package Y2026.M08.D05;
 
-import java.util.*;
 import java.io.*;
 
 public class S1928 {
