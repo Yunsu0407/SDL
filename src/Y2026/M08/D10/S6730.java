@@ -9,7 +9,7 @@ public class S6730 {
     }
 
     public static void blockRaceDifficulty() throws IOException {
-        BufferedReader br = new BufferedReader(new StringReader(input1));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int testcase = Integer.parseInt(br.readLine().trim());
         StringBuilder sb = new StringBuilder();
 
