@@ -7,16 +7,8 @@ public class S5601 {
         divideJuice();
     }
 
-    public static String input1 = "2\r\n" + //
-            "1\r\n" + //
-            "2";
-
-    public static String input2 = "1\r\n" + //
-            "5";
-
     public static void divideJuice() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input2));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int testcase = Integer.parseInt(br.readLine().trim());
         StringBuilder sb = new StringBuilder();
 
