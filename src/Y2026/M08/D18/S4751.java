@@ -16,9 +16,9 @@ public class S4751 {
             String word = br.readLine().trim();
             int len = word.length();
             StringBuilder decorated = new StringBuilder();
-            String secondCrust = makeOutLine(len, "..#.", '.');
-            String firstCrust = makeOutLine(len, ".#.#", '.');
-            String core = makeInnerLine(len, word, '#');
+            String secondCrust = makeCrust(len, "..#.", '.');
+            String firstCrust = makeCrust(len, ".#.#", '.');
+            String core = makeCore(len, word, '#');
 
             decorated.append(secondCrust);
             decorated.append(firstCrust);
@@ -32,7 +32,7 @@ public class S4751 {
         System.out.print(sb.toString());
     }
 
-    public static String makeOutLine(int len, String repeat, char last) {
+    public static String makeCrust(int len, String repeat, char last) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < len; ++i) {
@@ -43,7 +43,7 @@ public class S4751 {
         return sb.toString();
     }
 
-    public static String makeInnerLine(int len, String word, char last) {
+    public static String makeCore(int len, String word, char last) {
         StringBuilder sb = new StringBuilder();
 
         for (int j = 0; j < len; ++j) {
