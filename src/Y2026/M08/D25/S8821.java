@@ -1,27 +1,31 @@
 package Y2026.M08.D25;
 
-import java.util.*;
 import java.io.*;
 
-public class S14178 {
+public class S8821 {
     public static void main(String[] args) throws IOException {
-        calcSprinkler();
+        writeErase();
     }
 
-    public static void calcSprinkler() throws IOException {
+    public static void writeErase() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int testcase = Integer.parseInt(br.readLine().trim());
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < testcase; ++i) {
-            StringTokenizer st = new StringTokenizer(br.readLine().trim());
-            int size = Integer.parseInt(st.nextToken());
-            int range = Integer.parseInt(st.nextToken());
+            String call = br.readLine().trim();
+            boolean[] isCalled = new boolean[10];
 
-            int coverage = range * 2 + 1;
-            int count = size / coverage;
-            if (size % coverage != 0) {
-                count = count + 1;
+            for (int j = 0; j < call.length(); ++j) {
+                int curr = call.charAt(j) - '0';
+                isCalled[curr] = !isCalled[curr];
+            }
+
+            int count = 0;
+            for (boolean called : isCalled) {
+                if (called) {
+                    ++count;
+                }
             }
 
             String line = String.format("#%d %d\n", (i + 1), count);
