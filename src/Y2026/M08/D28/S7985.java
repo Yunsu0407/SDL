@@ -25,13 +25,11 @@ public class S7985 {
             }
 
             List<Integer> sorted = new ArrayList<>();
-            int mid = size / 2;
             int start = size;
             for (int d = 0; d < depth; ++d) {
                 start = start / 2;
                 int jump = (int) Math.pow(2, depth - d);
-                int end = mid * 2;
-                for (int r = start; r <= end; r = r + jump) {
+                for (int r = start; r <= size; r = r + jump) {
                     sorted.add(org[r]);
                 }
             }
