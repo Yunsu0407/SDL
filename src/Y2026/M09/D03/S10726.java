@@ -18,24 +18,9 @@ public class S10726 {
             StringTokenizer st = new StringTokenizer(br.readLine().trim());
             int bound = Integer.parseInt(st.nextToken());
             int value = Integer.parseInt(st.nextToken());
+            bound = (int) Math.pow(2, bound) - 1;
 
-            boolean isOn = true;
-            int divisor = 2;
-            int cycle = 0;
-            while (cycle < bound) {
-                int quotient = value / divisor;
-                int rest = value % divisor;
-
-                if (rest == 0) {
-                    isOn = false;
-                    break;
-                }
-
-                value = quotient;
-                ++cycle;
-            }
-
-            String res = isOn ? "ON" : "OFF";
+            String res = (value & bound) == bound ? "ON" : "OFF";
             String line = String.format("#%d %s\n", (i + 1), res);
             sb.append(line);
         }
