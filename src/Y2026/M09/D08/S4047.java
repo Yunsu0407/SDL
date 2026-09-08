@@ -15,11 +15,12 @@ public class S4047 {
         for (int i = 0; i < testcase; ++i) {
             String given = br.readLine().trim();
             boolean[][] cards = new boolean[4][13];
+            String shape = "SDHC";
 
             boolean isError = false;
             for (int j = 0; j <= given.length() - 3; j = j + 3) {
                 String sub = given.substring(j, j + 3);
-                int row = getRow(sub.charAt(0));
+                int row = shape.indexOf(sub.charAt(0));
                 int col = Integer.parseInt(sub.substring(1, 3)) - 1;
 
                 if (cards[row][col]) {
