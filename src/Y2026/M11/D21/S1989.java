@@ -7,14 +7,8 @@ public class S1989 {
         checkPalindrome();
     }
 
-    public static String input1 = "3\r\n" + //
-            "level     \r\n" + //
-            "samsung\r\n" + //
-            "eye";
-
     public static void checkPalindrome() throws IOException {
-        // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader br = new BufferedReader(new StringReader(input1));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tc = Integer.parseInt(br.readLine().trim());
         StringBuilder sb = new StringBuilder();
 
@@ -30,6 +24,7 @@ public class S1989 {
 
                 if (front != rear) {
                     isPalin = false;
+                    break;
                 }
             }
 
